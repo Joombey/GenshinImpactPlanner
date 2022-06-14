@@ -1,7 +1,7 @@
 package com.example.genshinimpactplanner.fragments;
 
-import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.genshinimpactplanner.R;
+import com.example.genshinimpactplanner.fragments.classes.Hero;
 
 public class BlankFragment extends Fragment {
 
-    private BlankViewModel mViewModel;
+    Hero hero;
+    ControllerInterface fragmentController;
 
     public static BlankFragment newInstance() {
         return new BlankFragment();
@@ -29,10 +31,12 @@ public class BlankFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BlankViewModel.class);
-        // TODO: Use the ViewModel
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        fragmentController = (ControllerInterface) context;
     }
 
+    interface ControllerInterface {
+        void setHero(Hero hero);
+    }
 }
